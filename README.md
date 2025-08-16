@@ -60,7 +60,9 @@ A Python-based Model Context Protocol (MCP) server that connects Claude Desktop 
         "--directory",
         <absolute-path-for-your-project>,
         "run",
-       "python -m main.py"]
+       "python",
+       "-m",
+       "main"]
     }
      }
    }

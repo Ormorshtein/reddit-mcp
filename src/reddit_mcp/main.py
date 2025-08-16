@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional
 # Enable memory tracing for debugging
 tracemalloc.start()
 
-from mcp.server import Server
+from mcp.server import Server, NotificationOptions
 from mcp.server.models import InitializationOptions
 from mcp.server.stdio import stdio_server
 from mcp.types import CallToolResult, ListToolsResult, TextContent, Tool
@@ -43,9 +43,19 @@ class RedditMCPServer:
         self.server = Server("reddit-mcp-server")
         self.reddit_client: Optional[RedditClient] = None
 
-        # Register handlers
-        self.server.list_tools = self.list_tools
-        self.server.call_tool = self.call_tool
+        # Register handlers using decorators
+        self.setup_handlers()
+
+    def setup_handlers(self):
+        """Set up MCP server handlers using decorators."""
+        
+        @self.server.list_tools()
+        async def handle_list_tools() -> ListToolsResult:
+            return await self._list_tools()
+        
+        @self.server.call_tool()
+        async def handle_call_tool(name: str, arguments: Dict[str, Any]) -> CallToolResult:
+            return await self._call_tool(name, arguments)
 
     async def initialize(self) -> None:
         """Initialize the Reddit client with API credentials."""
@@ -57,7 +67,7 @@ class RedditMCPServer:
             self.logger.error(f"Failed to initialize Reddit client: {e}")
             raise
 
-    async def list_tools(self) -> ListToolsResult:
+    async def _list_tools(self) -> ListToolsResult:
         """List all available Reddit tools."""
         tools = [
             Tool(
@@ -210,7 +220,7 @@ class RedditMCPServer:
 
         return ListToolsResult(tools=tools)
 
-    async def call_tool(self, name: str, arguments: Dict[str, Any]) -> CallToolResult:
+    async def _call_tool(self, name: str, arguments: Dict[str, Any]) -> CallToolResult:
         """Execute a tool call and return the result."""
         try:
             if not self.reddit_client:
@@ -385,7 +395,7 @@ async def main() -> None:
                     server_name="reddit-mcp-server",
                     server_version="1.0.0",
                     capabilities=mcp_server.server.get_capabilities(
-                        notification_options=None,
+                        notification_options=NotificationOptions(),
                         experimental_capabilities=None
                     ),
                 ),
