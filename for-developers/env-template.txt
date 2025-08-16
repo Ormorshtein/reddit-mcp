@@ -1,0 +1,30 @@
+# Reddit API Configuration
+# Get these credentials from https://www.reddit.com/prefs/apps/
+# You'll be requiered to create your own application, because that's the only way to access the Reddit API. 
+# In the app options, choose 'script'
+REDDIT_CLIENT_ID=your_client_id_here
+REDDIT_CLIENT_SECRET=your_client_secret_here
+REDDIT_USER_AGENT=YourApp/1.0 by YourUsername
+
+# Optional: Reddit account credentials for authenticated requests
+# Leave blank for read-only access to public content
+REDDIT_USERNAME=your_reddit_username
+REDDIT_PASSWORD=your_reddit_password
+
+# Server Configuration
+LOG_LEVEL=INFO
+MAX_RETRIES=3
+REQUEST_TIMEOUT=30
+
+# Cache Configuration
+CACHE_TTL=300
+CACHE_MAX_SIZE=1000
+
+# Rate Limiting Configuration
+RATE_LIMIT_REQUESTS=60
+RATE_LIMIT_WINDOW=60
+
+# Instructions:
+# 1. Copy this file to .env
+# 2. Fill in your actual Reddit API credentials
+# 3. Get credentials from: https://www.reddit.com/prefs/apps/

@@ -48,29 +48,30 @@ A Python-based Model Context Protocol (MCP) server that connects Claude Desktop 
    
    Add the server to your Claude Desktop configuration file:
    
-   **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
    **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
+   **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   **Linux**: `~/.config/Claude/claude_desktop_config.json`
    
    ```json
    {
      "mcpServers": {
-       "reddit": {
-         "command": "python",
-         "args": ["/absolute/path/to/reddit-mcp-server/main.py"],
-         "env": {
-           "REDDIT_CLIENT_ID": "your_client_id",
-           "REDDIT_CLIENT_SECRET": "your_client_secret",
-           "REDDIT_USER_AGENT": "YourApp/1.0 by YourUsername"
-         }
-       }
+        "reddit-mcp": {
+      "args": [
+        "--directory",
+        <absolute-path-for-your-project>,
+        "run",
+       "python -m main.py"]
+    }
      }
    }
    ```
    
-   **Important**: 
-   - Use absolute paths in the configuration
-   - Restart Claude Desktop after configuration changes
-   - Check Claude Desktop's developer console for connection status
+   **Important Notes:**
+   - Replace the `cwd` path with your actual project directory
+   - Use forward slashes (`/`) even on Windows in the JSON
+   - Make sure you have created and filled your `.env` file first
+   - Restart Claude Desktop after making configuration changes
+
 
 ## 🎯 Usage with Claude Desktop
 
