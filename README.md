@@ -58,7 +58,7 @@ A Python-based Model Context Protocol (MCP) server that connects Claude Desktop 
         "reddit-mcp": {
       "args": [
         "--directory",
-        <absolute-path-for-your-project>,
+        "absolute-path-for-your-project",
         "run",
        "python",
        "-m",
@@ -219,19 +219,6 @@ Configure logging level via the `LOG_LEVEL` environment variable.
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Reddit API documentation and community
-- MCP (Model Context Protocol) specification
-- Python Reddit API Wrapper (PRAW) library contributors
-
-## 📞 Support
-
-For issues, questions, or contributions:
-- Open an issue on GitHub
-- Check existing documentation and FAQ
-- Review Reddit API terms of service
 
 ---
 
