@@ -9,6 +9,6 @@ __version__ = "1.0.0"
 __author__ = "Oren Morshtein"
 __description__ = "Reddit MCP Server for Claude Desktop"
 
-from .main import RedditMCPServer
+from .main import main
 
-__all__ = ["RedditMCPServer"]
+__all__ = ["main"]
